@@ -1,5 +1,3 @@
-const axios = require("axios");
-
 const TimeEdit = class {
   constructor(baseUrl) {
     if (baseUrl[baseUrl.length - 1] !== "/") {
@@ -10,21 +8,8 @@ const TimeEdit = class {
 
   async getCourseEvents(courseId) {
     // console.log("timeeditapi getcourse", courseId);
-    const result = await axios({
-      method: "GET",
-      url: this.baseUrl + "ri.json",
-      params: {
-        h: "f",
-        sid: 3,
-        p: "0.m,12.n",
-        objects: courseId,
-        ox: 0,
-        types: 0,
-        fe: 0,
-        h2: "f",
-        l: "en_EN"
-      }
-    }).catch(err => {
+    const result = await fetch(this.baseUrl + `ri.json?h=f&sid=3&p=0.m,12.n&objects=${courseId}&ox=0&types=0&fe=0&h2=f&l=en_EN`)
+    .catch(err => {
       console.log(err.message);
     });
 
